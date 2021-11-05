@@ -1,7 +1,10 @@
 package cloud.reto345.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="client")
@@ -14,7 +17,14 @@ public class Client implements Serializable {
     private String password;
     private String name;
     private Integer age;
-    private String message;
+
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "client")
+    @JsonIgnoreProperties({"client","cloud"})
+    public List<Message> messages;
+
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "client")
+    @JsonIgnoreProperties("client")
+    public List<Reservation> reservations;
 
     public Integer getIdClient() {
         return idClient;
@@ -56,11 +66,19 @@ public class Client implements Serializable {
         this.age = age;
     }
 
-    public String getMessage() {
-        return message;
+    public List<Message> getMessages() {
+        return messages;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

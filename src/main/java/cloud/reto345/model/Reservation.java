@@ -1,5 +1,7 @@
 package cloud.reto345.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +16,18 @@ public class Reservation implements Serializable {
     private Date startDate;
     private Date devolutionDate;
     private String status="created";
+
+    @ManyToOne
+    @JoinColumn(name="cloudId")
+    @JsonIgnoreProperties("reservations")
+    private Cloud cloud;
+
+    @ManyToOne
+    @JoinColumn(name="clientId")
+    @JsonIgnoreProperties({"reservations","messages"})
+    private Client client;
+
+    private Integer score;
 
     public Integer getIdReservation() {
         return idReservation;
@@ -45,5 +59,29 @@ public class Reservation implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Cloud getCloud() {
+        return cloud;
+    }
+
+    public void setCloud(Cloud cloud) {
+        this.cloud = cloud;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 }
