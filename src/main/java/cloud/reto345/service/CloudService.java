@@ -1,6 +1,8 @@
 package cloud.reto345.service;
 
 
+import cloud.reto345.model.Category;
+import cloud.reto345.model.Client;
 import cloud.reto345.model.Cloud;
 import cloud.reto345.repository.CloudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +37,38 @@ public class CloudService {
             }
         }
 
+    }
+
+    public Cloud update(Cloud c){
+        if(c.getId()!=null){
+            Optional<Cloud> claux=cloudRepository.getCloud(c.getId());
+            if(!claux.isEmpty()){
+                if(c.getName()!=null){
+                    claux.get().setName(c.getName());
+                }
+                if(c.getBrand()!=null){
+                    claux.get().setBrand(c.getBrand());
+                }
+                if(c.getYear()!=null){
+                    claux.get().setYear(c.getYear());
+                }
+
+                if(c.getDescription()!=null){
+                    claux.get().setDescription(c.getDescription());
+                }
+                return cloudRepository.save(claux.get());
+            }
+        }
+        return c;
+
+    }
+
+    public boolean deleteCloud(int id) {
+        Optional <Cloud> c=getCloud(id);
+        if(!c.isEmpty()){
+            cloudRepository.delete(c.get());
+            return true;
+        }
+        return false;
     }
 }

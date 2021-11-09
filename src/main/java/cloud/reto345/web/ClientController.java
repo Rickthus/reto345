@@ -1,5 +1,6 @@
 package cloud.reto345.web;
 
+import cloud.reto345.model.Category;
 import cloud.reto345.model.Client;
 import cloud.reto345.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,17 @@ public class ClientController {
     public Client save(@RequestBody Client c){
         return clientService.save(c);
 
+    }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Client update(@RequestBody Client c){
+        return clientService.update(c);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean deleteClient(@PathVariable("id") int idClient){
+        return clientService.deleteClient(idClient);
     }
 
 }

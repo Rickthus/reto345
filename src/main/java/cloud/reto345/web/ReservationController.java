@@ -1,5 +1,6 @@
 package cloud.reto345.web;
 
+import cloud.reto345.model.Category;
 import cloud.reto345.model.Message;
 import cloud.reto345.model.Reservation;
 import cloud.reto345.service.MessageService;
@@ -24,7 +25,7 @@ public class ReservationController {
         return reservationService.getAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{idReservation}")
     public Optional<Reservation> getReservation(@PathVariable("idReservation") int idReservation){
         return reservationService.getReservation(idReservation);
     }
@@ -34,6 +35,17 @@ public class ReservationController {
     public Reservation save(@RequestBody Reservation c){
         return reservationService.save(c);
 
+    }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Reservation update(@RequestBody Reservation c){
+        return reservationService.update(c);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean deleteReservation(@PathVariable("id") int idReservation){
+        return reservationService.deleteReservation(idReservation);
     }
 
 }

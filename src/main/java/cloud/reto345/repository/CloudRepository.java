@@ -27,6 +27,8 @@ public class CloudRepository {
         return cloudCrudRepository.save(c);
     }
 
-
+    public void delete(Cloud c){
+        cloudCrudRepository.delete(c);
+    }
 
 }

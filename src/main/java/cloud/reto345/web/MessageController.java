@@ -1,5 +1,6 @@
 package cloud.reto345.web;
 
+import cloud.reto345.model.Category;
 import cloud.reto345.model.Message;
 import cloud.reto345.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class MessageController {
         return messageService.getAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{idMessage}")
     public Optional<Message> getMessage(@PathVariable("idMessage") int idMessage){
         return messageService.getMessage(idMessage);
     }
@@ -32,6 +33,17 @@ public class MessageController {
     public Message save(@RequestBody Message c){
         return messageService.save(c);
 
+    }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Message update(@RequestBody Message c){
+        return messageService.update(c);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean deleteCategory(@PathVariable("id") int idMessage){
+        return messageService.deleteMessage(idMessage);
     }
 
 }
