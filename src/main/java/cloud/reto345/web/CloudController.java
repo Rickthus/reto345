@@ -1,8 +1,6 @@
 package cloud.reto345.web;
 
-import cloud.reto345.model.Category;
 import cloud.reto345.model.Cloud;
-import cloud.reto345.service.CategoryService;
 import cloud.reto345.service.CloudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

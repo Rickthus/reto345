@@ -1,6 +1,5 @@
 package cloud.reto345.web;
 
-import cloud.reto345.model.Category;
 import cloud.reto345.model.Client;
 import cloud.reto345.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,8 @@
 package cloud.reto345.web;
 
-import cloud.reto345.model.Category;
-import cloud.reto345.model.Message;
 import cloud.reto345.model.Reservation;
-import cloud.reto345.service.MessageService;
+import cloud.reto345.model.custom.CountClient;
+import cloud.reto345.model.custom.StatusAmount;
 import cloud.reto345.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,4 +47,18 @@ public class ReservationController {
         return reservationService.deleteReservation(idReservation);
     }
 
+    @GetMapping("/report-status")
+    public StatusAmount getReserv() {
+        return reservationService.reportStatusService();
+    }
+
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservation> getReservationPeriod (@PathVariable("dateOne")String dateOne, @PathVariable("dateTwo")String dateTwo ){
+        return reservationService.getReservationPeriod(dateOne, dateTwo);
+    }
+
+    @GetMapping("/report-clients")
+    public List<CountClient> getTopClient() {
+        return reservationService.getTopClient();
+    }
 }
